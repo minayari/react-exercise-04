@@ -4,7 +4,6 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Badge, { badgeClasses } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
-
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AlarmIcon from "@mui/icons-material/Alarm";
@@ -42,7 +41,6 @@ export default function SingleProduct() {
 
   useEffect(() => {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
-    console.log(cartProducts);
   }, [cartProducts]);
 
   return (
