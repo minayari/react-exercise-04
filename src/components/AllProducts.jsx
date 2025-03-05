@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-export default function AllProducts({ image, title, price }) {
+export default function AllProducts({ image, title, price, id }) {
   const navigate = useNavigate();
 
   function handleSingelProductNav() {
-    navigate("/product", { state: { image, title, price } });
+    navigate("/product", { state: { image, title, price, id } });
   }
 
   return (

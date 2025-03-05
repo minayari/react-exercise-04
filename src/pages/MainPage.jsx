@@ -48,6 +48,7 @@ export default function MainPage() {
                 image={data.image}
                 title={data.title}
                 price={data.price}
+                id={data.id}
               />
             ))
           : searchRes.map((data) => (
@@ -56,6 +57,7 @@ export default function MainPage() {
                 image={data.image}
                 title={data.title}
                 price={data.price}
+                id={data.id}
               />
             ))}
       </div>
