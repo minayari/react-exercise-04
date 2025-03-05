@@ -1,6 +1,10 @@
 import { useLocation } from "react-router-dom";
 import * as React from "react";
 import IconButton from "@mui/material/IconButton";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Badge, { badgeClasses } from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AlarmIcon from "@mui/icons-material/Alarm";
@@ -8,28 +12,37 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useState, useEffect } from "react";
 
 export default function SingleProduct() {
+  const CartBadge = styled(Badge)`
+    & .${badgeClasses.badge} {
+      top: -12px;
+      right: -6px;
+    }
+  `;
+
   const location = useLocation();
   const { image, title, price, id } = location.state || {};
-  const [cartProducts, setCartProducts] = useState(() => {
-    const savedCartProducts = localStorage.getItem("cartProducts");
-    return savedCartProducts ? JSON.parse(savedCartProducts) : [];
+  const [cartProducts, setCartProducst] = useState(() => {
+    const savedProducts = localStorage.getItem("cartProducts");
+    return savedProducts ? JSON.parse(savedProducts) : [];
   });
 
   function handleAddToCart() {
-    setCartProducts((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === id);
+    setCartProducst((prevProduct) => {
+      const existingProduct = prevProduct.find((item) => item.id === id);
+
       if (existingProduct) {
-        existingProduct.map((item) =>
+        return prevProduct.map((item) =>
           item.id === id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...prevCart, { image, title, price, id, quantity: 1 }];
+        return [...prevProduct, { image, title, price, id, quantity: 1 }];
       }
     });
   }
 
   useEffect(() => {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+    console.log(cartProducts);
   }, [cartProducts]);
 
   return (
@@ -45,13 +58,26 @@ export default function SingleProduct() {
           <span className="text-cyan-900/80 text-[1.1rem]">${price}</span>
         </div>
         <div className="h-[20%] flex flex-col items-center justify-end">
-          <IconButton
-            onClick={handleAddToCart}
-            color="primary"
-            aria-label="add to shopping cart"
-          >
-            <AddShoppingCartIcon />
-          </IconButton>
+          {cartProducts.length === 0 ? (
+            <IconButton
+              onClick={handleAddToCart}
+              color="primary"
+              aria-label="add to shopping cart"
+            >
+              <AddShoppingCartIcon />
+            </IconButton>
+          ) : (
+            <IconButton onClick={handleAddToCart}>
+              <ShoppingCartIcon fontSize="small" />
+              <CartBadge
+                badgeContent={
+                  cartProducts.find((item) => item.id === id)?.quantity
+                }
+                color="primary"
+                overlap="circular"
+              />
+            </IconButton>
+          )}
         </div>
       </div>
     </>
