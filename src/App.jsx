@@ -10,15 +10,13 @@ import Cart from "./pages/Cart";
 function App() {
   return (
     <>
-      <Layout>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/product" element={<SingleProduct />} />
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </BrowserRouter>
-      </Layout>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/product" element={<SingleProduct />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

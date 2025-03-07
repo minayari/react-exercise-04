@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import AllProducts from "../components/AllProducts";
+import Header from "../components/Haeder";
+import Footer from "../components/Footer";
 
 export default function MainPage() {
   const [allData, setAllData] = useState(
@@ -31,6 +33,7 @@ export default function MainPage() {
 
   return (
     <>
+      <Header />
       <div className="flex justify-center items-center mt-[1.5rem] mb-[1.5rem]">
         <input
           type="text"
@@ -61,6 +64,7 @@ export default function MainPage() {
               />
             ))}
       </div>
+      <Footer />
     </>
   );
 }
