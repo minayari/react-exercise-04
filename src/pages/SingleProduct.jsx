@@ -47,7 +47,6 @@ export default function SingleProduct() {
 
   return (
     <>
-      <Header />
       <div className="w-[20rem] h-[35rem] ring-2 ring-cyan-900/70 mx-auto my-[1rem] p-[1rem] flex flex-col rounded-[1rem]">
         <div className=" h-[60%]">
           <img className="w-full h-full" src={image} />
@@ -81,7 +80,6 @@ export default function SingleProduct() {
           )}
         </div>
       </div>
-      <Footer />
     </>
   );
 }

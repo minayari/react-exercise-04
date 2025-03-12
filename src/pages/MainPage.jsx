@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import AllProducts from "../components/AllProducts";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import Header from "../components/Haeder";
 import Footer from "../components/Footer";
+import { dataContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
-  const [allData, setAllData] = useState(
-    JSON.parse(localStorage.getItem("allData")) || []
-  );
+  const { allData, setAllData } = useContext(dataContext);
   const searchRef = useRef(null);
   const [searchRes, setsearchRes] = useState([]);
+  const singleNavigate = useNavigate();
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -31,9 +31,12 @@ export default function MainPage() {
     );
   }, []);
 
+  function handleSingelProductNav() {
+    singleNavigate("/product");
+  }
+
   return (
     <>
-      <Header />
       <div className="flex justify-center items-center mt-[1.5rem] mb-[1.5rem]">
         <input
           type="text"
@@ -46,25 +49,42 @@ export default function MainPage() {
       <div className="flex flex-wrap justify-between p-[1rem]">
         {searchRes.length === 0
           ? allData.map((data) => (
-              <AllProducts
-                key={data.id}
-                image={data.image}
-                title={data.title}
-                price={data.price}
-                id={data.id}
-              />
+              <div key={data.id}>
+                <div
+                  onClick={handleSingelProductNav}
+                  className="flex flex-col h-[30rem] w-[18rem] p-[1rem] mb-[1.3rem] ring-2 ring-cyan-900/60 rounded-[1rem]"
+                >
+                  <img className="h-[65%]" src={data.image} />
+                  <div className="h-[30%]">
+                    <h2 className="text-[1.3rem] font-bold truncate mt-[2rem] mb-[1rem]">
+                      {data.title}
+                    </h2>
+                    <span className="text-cyan-700 text-[1.1rem]">
+                      ${data.price}
+                    </span>
+                  </div>
+                </div>
+              </div>
             ))
           : searchRes.map((data) => (
-              <AllProducts
-                key={data.id}
-                image={data.image}
-                title={data.title}
-                price={data.price}
-                id={data.id}
-              />
+              <div key={data.id}>
+                <div
+                  onClick={handleSingelProductNav}
+                  className="flex flex-col h-[30rem] w-[18rem] p-[1rem] mb-[1.3rem] ring-2 ring-cyan-900/60 rounded-[1rem]"
+                >
+                  <img className="h-[65%]" src={data.image} />
+                  <div className="h-[30%]">
+                    <h2 className="text-[1.3rem] font-bold truncate mt-[2rem] mb-[1rem]">
+                      {data.title}
+                    </h2>
+                    <span className="text-cyan-700 text-[1.1rem]">
+                      ${data.price}
+                    </span>
+                  </div>
+                </div>
+              </div>
             ))}
       </div>
-      <Footer />
     </>
   );
 }
