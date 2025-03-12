@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 export default function Cart() {
   const location = useLocation();
   const products = location.state?.products || [];
-  console.log(products);
   return (
     <>
       <div className="flex flex-wrap items-center justify-center my-[1rem]">

@@ -8,7 +8,7 @@ import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AlarmIcon from "@mui/icons-material/Alarm";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Header from "../components/Haeder";
 import Footer from "../components/Footer";
 
@@ -27,7 +27,7 @@ export default function SingleProduct() {
     return savedProducts ? JSON.parse(savedProducts) : [];
   });
 
-  function handleAddToCart() {
+  const handleAddToCart = useCallback(() => {
     setCartProducst((prevProduct) => {
       const existingProduct = prevProduct.find((item) => item.id === id);
 
@@ -39,7 +39,7 @@ export default function SingleProduct() {
         return [...prevProduct, { image, title, price, id, quantity: 1 }];
       }
     });
-  }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
@@ -81,7 +81,7 @@ export default function SingleProduct() {
           )}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

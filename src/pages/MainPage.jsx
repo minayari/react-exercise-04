@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import AllProducts from "../components/AllProducts";
 import Header from "../components/Haeder";
 import Footer from "../components/Footer";
@@ -19,7 +19,7 @@ export default function MainPage() {
       });
   }, []);
 
-  function searchHnadler() {
+  const searchHnadler = useCallback(() => {
     setsearchRes(
       allData.filter(
         (item) =>
@@ -29,7 +29,7 @@ export default function MainPage() {
           item.price.toString().includes(searchRef.current.value)
       )
     );
-  }
+  }, []);
 
   return (
     <>
