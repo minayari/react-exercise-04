@@ -14,7 +14,6 @@ export default function MainPage() {
     fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
       .then((data) => {
-        localStorage.setItem("allData", JSON.stringify(data));
         setAllData(data);
       });
   }, []);
@@ -31,8 +30,8 @@ export default function MainPage() {
     );
   }, []);
 
-  function handleSingelProductNav() {
-    singleNavigate("/product");
+  function handleSingelProductNav(title, image, price, id) {
+    singleNavigate("/product", { state: { title, image, price, id } });
   }
 
   return (
@@ -51,7 +50,14 @@ export default function MainPage() {
           ? allData.map((data) => (
               <div key={data.id}>
                 <div
-                  onClick={handleSingelProductNav}
+                  onClick={() =>
+                    handleSingelProductNav(
+                      data.title,
+                      data.image,
+                      data.price,
+                      data.id
+                    )
+                  }
                   className="flex flex-col h-[30rem] w-[18rem] p-[1rem] mb-[1.3rem] ring-2 ring-cyan-900/60 rounded-[1rem]"
                 >
                   <img className="h-[65%]" src={data.image} />

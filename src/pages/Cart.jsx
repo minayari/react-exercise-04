@@ -1,8 +1,15 @@
 import { useLocation } from "react-router-dom";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import Button from "@mui/material/Button";
+
+import { useCallback } from "react";
 
 export default function Cart() {
   const location = useLocation();
   const products = location.state?.products || [];
+  console.log(products);
+
   return (
     <>
       <div className="flex flex-wrap items-center justify-center my-[1rem]">
@@ -22,8 +29,8 @@ export default function Cart() {
               <span className="bg-cyan-900/70 p-[0.2rem] text-cyan-50 text-[1rem]">
                 ${pro.price}
               </span>
-              <p className="mt-[0.5rem] text-cyan-900/60">
-                Quantity:<span className="text-cyan-950"> {pro.quantity}</span>
+              <p className="text-cyan-800/50 mt-[1rem]">
+                Quantity: <span className="text-cyan-800"> {pro.quantity}</span>
               </p>
             </div>
           ))

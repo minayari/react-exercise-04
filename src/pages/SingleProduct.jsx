@@ -4,13 +4,9 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Badge, { badgeClasses } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
-import Stack from "@mui/material/Stack";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AlarmIcon from "@mui/icons-material/Alarm";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useState, useEffect, useCallback } from "react";
-import Header from "../components/Haeder";
-import Footer from "../components/Footer";
+
 
 export default function SingleProduct() {
   const CartBadge = styled(Badge)`
